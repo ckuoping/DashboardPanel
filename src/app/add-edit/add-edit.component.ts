@@ -48,7 +48,7 @@ export class AddEditComponent implements OnInit {
       this.api.addEmployee(this.empForm.value).subscribe({
         next:(val:any)=>{
           /* 成功增加資料後關閉彈跳視窗 */ 
-          this.dialog.close();
+          this.dialog.close(true);
           /* 成功增加資料後關閉彈跳視窗 */ 
           this.empForm.reset();
         },

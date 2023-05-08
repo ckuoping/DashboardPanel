@@ -26,7 +26,16 @@ export class AppComponent implements OnInit {
     this.getEmpolyeeList()
   }
   openAddEditDialog(){
-    this.dialog.open(AddEditComponent)
+   const dialogRef =  this.dialog.open(AddEditComponent);
+   dialogRef.afterClosed().subscribe({
+    next:(val:any)=>{
+      console.log('reply',val);
+      if(val)
+      {
+        this.getEmpolyeeList();
+      }
+    }
+   })
   }
 
   getEmpolyeeList(){
@@ -49,5 +58,20 @@ export class AppComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteEmployee(id:number){
+    this.api.deleteEmployee(id).subscribe({
+      next:(val:any)=>{
+        // this.dataSource = new MatTableDataSource(val);
+        // this.dataSource.sort = this.sort;
+        // this.dataSource.paginator = this.paginator;
+        alert('delete successfully');
+        this.getEmpolyeeList();
+      },
+      error:(err:any)=>{
+        console.log(err);
+      }
+    })
   }
 }
