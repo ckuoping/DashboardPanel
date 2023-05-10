@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../service/api.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-edit',
   templateUrl: './add-edit.component.html',
@@ -22,7 +22,8 @@ export class AddEditComponent implements OnInit {
     (
     private formbuilder : FormBuilder,
     private api : ApiService,
-    private dialog : MatDialogRef<AddEditComponent>
+    private dialog : MatDialogRef<AddEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data:any
     
     ) {
     this.empForm = this.formbuilder.group({
@@ -39,23 +40,44 @@ export class AddEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    if(this.data)
+    {
+      this.empForm.patchValue(this.data)
+    }    
   }
 
   onFormSubmit(){
     if(this.empForm.valid)
     {
-      console.log(this.empForm.value);
-      this.api.addEmployee(this.empForm.value).subscribe({
-        next:(val:any)=>{
-          /* 成功增加資料後關閉彈跳視窗 */ 
-          this.dialog.close(true);
-          /* 成功增加資料後關閉彈跳視窗 */ 
-          this.empForm.reset();
-        },
-        error:(err:any)=>{
-          console.log(err)
-        }
-      })
+      if(this.data)
+      {
+        this.api.updateEmployee(this.data.id,this.empForm.value).subscribe({
+          next:(val:any)=>{
+            /* 成功編輯資料後關閉彈跳視窗 */ 
+            this.dialog.close(true);
+            /* 成功增加資料後關閉彈跳視窗 */ 
+            this.empForm.reset();
+          },
+          error:(err:any)=>{
+            console.log(err)
+          }
+        })
+      }
+      else
+      {
+        this.api.addEmployee(this.empForm.value).subscribe({
+          next:(val:any)=>{
+            /* 成功增加資料後關閉彈跳視窗 */ 
+            this.dialog.close(true);
+            /* 成功增加資料後關閉彈跳視窗 */ 
+            this.empForm.reset();
+          },
+          error:(err:any)=>{
+            console.log(err)
+          }
+        })
+      }
+
     }
   }
 

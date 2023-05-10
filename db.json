@@ -30,7 +30,7 @@
       "id": 1
     },
     {
-      "firstName": "Nancy",
+      "firstName": "Nancia",
       "lastName": "Huang",
       "email": "ncy@gmail.com",
       "dob": "2023-05-19T16:00:00.000Z",
@@ -59,8 +59,8 @@
       "email": "lucas@pchome.com",
       "dob": "2016-01-03T16:00:00.000Z",
       "gender": "male",
-      "education": "Diploma",
-      "company": "HTC",
+      "education": "Post Graduate",
+      "company": "ASUS",
       "experience": 8,
       "salary": 98577,
       "id": 5

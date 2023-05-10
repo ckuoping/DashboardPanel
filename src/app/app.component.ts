@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.getEmpolyeeList()
   }
+
+  /* 開啟增加資料視窗 */
   openAddEditDialog(){
    const dialogRef =  this.dialog.open(AddEditComponent);
    dialogRef.afterClosed().subscribe({
@@ -38,6 +40,7 @@ export class AppComponent implements OnInit {
    })
   }
 
+  /* 取得所有資料 */
   getEmpolyeeList(){
     this.api.getEmployee().subscribe({
       next:(val:any)=>{
@@ -51,6 +54,7 @@ export class AppComponent implements OnInit {
     })
   }
 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -60,6 +64,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /* 刪除特定資料 */
   deleteEmployee(id:number){
     this.api.deleteEmployee(id).subscribe({
       next:(val:any)=>{
@@ -74,4 +79,22 @@ export class AppComponent implements OnInit {
       }
     })
   }
+
+  /* 開啟編輯資料視窗 */
+  openOnEditDialog(data:any){
+    const dialogRef =  this.dialog.open(AddEditComponent,
+      {
+        data:data
+      });
+      
+      dialogRef.afterClosed().subscribe({
+        next:(val:any)=>{
+          console.log('reply',val);
+          if(val)
+          {
+            this.getEmpolyeeList();
+          }
+        }
+       })
+   }
 }
