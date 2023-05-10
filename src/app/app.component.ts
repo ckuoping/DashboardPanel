@@ -2,9 +2,10 @@ import { Component,OnInit , ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEditComponent } from './add-edit/add-edit.component';
 import { ApiService } from './service/api.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { SnackbarService } from './service/snackbar.service';
+import { MatPaginator} from '@angular/material/paginator';
+import { MatSort} from '@angular/material/sort';
+import { MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(public dialog: MatDialog, private api : ApiService) {}
+  constructor(public dialog: MatDialog, private api : ApiService, private snackbar : SnackbarService) {}
 
   ngOnInit(): void {
     this.getEmpolyeeList()
@@ -68,10 +69,7 @@ export class AppComponent implements OnInit {
   deleteEmployee(id:number){
     this.api.deleteEmployee(id).subscribe({
       next:(val:any)=>{
-        // this.dataSource = new MatTableDataSource(val);
-        // this.dataSource.sort = this.sort;
-        // this.dataSource.paginator = this.paginator;
-        alert('delete successfully');
+        this.snackbar.openSnackBar('Delete successfully','Done');
         this.getEmpolyeeList();
       },
       error:(err:any)=>{

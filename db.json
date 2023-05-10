@@ -36,7 +36,7 @@
       "dob": "2023-05-19T16:00:00.000Z",
       "gender": "female",
       "education": "Graduate",
-      "company": "GK",
+      "company": "DKNY",
       "experience": 5,
       "salary": 75600,
       "id": 3
@@ -59,11 +59,23 @@
       "email": "lucas@pchome.com",
       "dob": "2016-01-03T16:00:00.000Z",
       "gender": "male",
-      "education": "Post Graduate",
+      "education": "Intermediate",
       "company": "ASUS",
       "experience": 8,
       "salary": 98577,
       "id": 5
+    },
+    {
+      "firstName": "Tracy",
+      "lastName": "Smith",
+      "email": "tracysmith@google.com",
+      "dob": "2023-05-07T16:00:00.000Z",
+      "gender": "female",
+      "education": "Metric",
+      "company": "Google",
+      "experience": 5,
+      "salary": 65000,
+      "id": 6
     }
   ]
 }
